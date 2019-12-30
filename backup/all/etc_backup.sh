@@ -8,6 +8,7 @@
 # wget https://raw.githubusercontent.com/pedroaugustoferreira/ocp/master/backup/all/etc_backup.sh
 # chmod +x etc_backup.sh
 # 0 1 1,15 * * /backup/etc/etc_backup.sh  &> /backup/etc/etc_backup.log
+# * * * * * /backup/etc/etc_backup.sh  &> /backup/etc/etc_backup.log
 
 
 # https://docs.openshift.com/container-platform/3.11/day_two_guide/environment_backup.html#creating-master-backup_environment-backup
