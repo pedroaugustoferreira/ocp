@@ -9,7 +9,7 @@
 # mount /backup
 # mkdir /backup/etc
 # cd /backup/etc/
-# wget https://raw.githubusercontent.com/pedroaugustoferreira/ocp/master/backup/all/etc_backup.sh
+# wget --no-check-certificate https://raw.githubusercontent.com/pedroaugustoferreira/ocp/master/backup/all/etc_backup.sh
 # chmod +x etc_backup.sh
 # 0 1 1,15 * * /backup/etc/etc_backup.sh  &> /backup/etc/etc_backup.log
 # * * * * * /backup/etc/etc_backup.sh  &> /backup/etc/etc_backup.log
