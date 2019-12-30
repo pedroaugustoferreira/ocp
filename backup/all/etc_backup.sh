@@ -1,8 +1,11 @@
 #!/bin/bash -l
 # mkdir /backup
 # lvcreate -L+1G --name backup vg00
+# lvcreate -L+1G --name backup vg_root
 # mkfs.ext4 /dev/vg00/backup
+# mkfs.ext4 /dev/vg_root/backup
 # /dev/mapper/vg00-backup    /backup                    ext4    defaults        1 2
+# /dev/mapper/vg_root-backup    /backup                    ext4    defaults        1 2
 # mount /backup
 # mkdir /backup/etc
 # cd /backup/etc/
