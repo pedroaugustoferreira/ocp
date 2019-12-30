@@ -4,7 +4,8 @@
 # mkfs.ext4 /dev/vg00/backup
 # /dev/mapper/vg00-backup    /backup                    ext4    defaults        1 2
 # mount /backup
-# cd /backup
+# mkdir /backup/etc
+# cd /backup/etc/
 # wget https://raw.githubusercontent.com/pedroaugustoferreira/ocp/master/backup/all/etc_backup.sh
 # chmod +x etc_backup.sh
 # 0 1 1,15 * * /backup/etc/etc_backup.sh  &> /backup/etc/etc_backup.log
