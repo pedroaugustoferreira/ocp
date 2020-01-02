@@ -34,4 +34,6 @@ rpm -qa | sort &> ${file}.rpm.log
 
 free -g        &> ${file}.free.log 
 
+gzip -f *.log
+
 
