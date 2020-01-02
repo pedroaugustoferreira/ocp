@@ -1,4 +1,4 @@
-# mkdir /backup/system_health;cd /backup/system_health
+# mkdir /backup/system_health;cd /backup/system_health;pwd
 # wget https://raw.githubusercontent.com/pedroaugustoferreira/ocp/master/backup/all/system_health.sh
 # chmod +x system_health.sh
 
