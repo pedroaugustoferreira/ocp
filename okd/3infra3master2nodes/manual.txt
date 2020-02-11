@@ -85,3 +85,6 @@ ansible-playbook -i inventory.ini openshift-ansible/playbooks/deploy_cluster.yml
 ---------------------------------------------------------------------------------
 # Reset password of system admin on master machine
 htpasswd -c /etc/origin/master/htpasswd admin
+
+# admin 
+oc adm policy add-cluster-role-to-user cluster-admin pedro 
