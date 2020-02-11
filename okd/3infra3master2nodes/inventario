@@ -56,6 +56,3 @@ openshift_master_htpasswd_users={'pedro': '$apr1$QD/hlKZ9$LlvF0L6/EDo/gpKNU/QW50
 
 192.168.100.127  openshift_node_group_name='node-config-compute'
 192.168.100.128  openshift_node_group_name='node-config-compute'
-
-
-
