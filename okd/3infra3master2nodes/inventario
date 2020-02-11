@@ -15,6 +15,11 @@ openshift_master_cluster_hostname=api.uva.com.br
 openshift_master_cluster_public_hostname=web-console.uva.com.br
 openshift_master_cluster_method=native
 deployment_type=origin
+openshift_master_api_port=443
+openshift_master_console_port=443
+
+etcd_debug=true
+debug_level=4
 
 [nodes:vars]
 openshift_disable_check=disk_availability,memory_availability,docker_storage
@@ -50,3 +55,6 @@ openshift_master_htpasswd_users={'pedro': '$apr1$QD/hlKZ9$LlvF0L6/EDo/gpKNU/QW50
 
 192.168.100.127  openshift_node_group_name='node-config-compute'
 192.168.100.128  openshift_node_group_name='node-config-compute'
+
+
+
