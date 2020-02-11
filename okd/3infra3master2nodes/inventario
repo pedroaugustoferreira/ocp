@@ -1,0 +1,51 @@
+# Create an OSEv3 group that contains the masters, nodes, and etcd groups
+[OSEv3:children]
+masters
+nodes
+etcd
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+# If ansible_ssh_user is not root, ansible_become must be set to true
+ansible_become=true
+openshift_master_default_subdomain=app.uva.com.br
+openshift_master_cluster_hostname=api.uva.com.br
+openshift_master_cluster_public_hostname=web-console.uva.com.br
+deployment_type=origin
+
+[nodes:vars]
+openshift_disable_check=disk_availability,memory_availability,docker_storage
+[masters:vars]
+openshift_disable_check=disk_availability,memory_availability,docker_storage
+# uncomment the following to enable htpasswd authentication; defaults to DenyAllPasswordIdentityProvider
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+
+# senha master
+openshift_master_htpasswd_users={'pedro': '$apr1$QD/hlKZ9$LlvF0L6/EDo/gpKNU/QW50'}
+
+# host group for masters
+[masters]
+192.168.100.121
+192.168.100.122
+192.168.100.123
+
+# host group for etcd
+[etcd]
+192.168.100.121
+192.168.100.122
+192.168.100.123
+
+# host group for nodes, includes region info
+[nodes]
+192.168.100.121  openshift_node_group_name='node-config-master'
+192.168.100.122  openshift_node_group_name='node-config-master'
+192.168.100.123  openshift_node_group_name='node-config-master'
+
+192.168.100.124  openshift_node_group_name='node-config-infra'
+192.168.100.125  openshift_node_group_name='node-config-infra'
+192.168.100.126  openshift_node_group_name='node-config-infra'
+
+192.168.100.127  openshift_node_group_name='node-config-compute'
+192.168.100.128  openshift_node_group_name='node-config-compute'
