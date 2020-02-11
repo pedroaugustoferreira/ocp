@@ -13,6 +13,7 @@ ansible_become=true
 openshift_master_default_subdomain=app.uva.com.br
 openshift_master_cluster_hostname=api.uva.com.br
 openshift_master_cluster_public_hostname=web-console.uva.com.br
+openshift_master_cluster_method=native
 deployment_type=origin
 
 [nodes:vars]
