@@ -1,2 +1,3 @@
 for i in $(seq 1 30); do curl -s "http://httpd-example-new-html.app.uva.com.br?[1-10000000]" &> /dev/null & done
 ps -ef|grep curl|awk '{print "kill -9 "$2}'|sh
+while true ; do time curl -s "http://httpd-example-new-html.app.uva.com.br"; sleep 1; done
