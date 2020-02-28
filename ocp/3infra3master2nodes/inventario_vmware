@@ -1,0 +1,71 @@
+# Create an OSEv3 group that contains the masters, nodes, and etcd groups
+[OSEv3:children]
+masters
+nodes
+etcd
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+
+# Storage persistente - VMWARE
+openshift_cloudprovider_kind=vsphere
+openshift_cloudprovider_vsphere_username=administrator@vsphere.local
+openshift_cloudprovider_vsphere_password=W@ster123
+openshift_cloudprovider_vsphere_host=192.168.100.102
+openshift_cloudprovider_vsphere_datacenter=SVC-DC
+openshift_cloudprovider_vsphere_datastore=LAB_Local_Raid5
+
+
+oreg_auth_user=6583642|ocp
+oreg_auth_password="eyJhbGciOiJSUzUxMiJ9.eyJzdWIiOiIyN2U1NWI5YmM4N2Y0ZjY0OWU5Njg2YWM1NDY4MzNkNSJ9.fE9JRkstam1knBJuhNlQE5cjBUY3n7qGE4REPVat2FdCY3iQMSOFwTV0J99QTL3up4P987ojVVEwxvb8oHm6N2P6xWvdT3Ms9YAi0ChG4QmHY7-Bt1gLRanYc7kxsVhi3X-ItrceNA-r7UjGaB02qACYN8s07IhQmhiBwyPTY786B-WPMqd5bZkZxMQYeexGZ2vSwetC2MJPcA2GdlBjyxKJBHkQ1Cf9yTCuOEnn59Dzo7stYnnvbmKCQaqPklDpcMzuyfIHty4XxTilQGd3dyKY0UDy8rUsV2bBgs7Vadv410OzqnBCeVUt6DIPTmR--e7ElWL2wOkrmNRMAe6Og_OVP1lyn11JwCVHPVrSTI9sEtvF0l1yJ8aePxBheDx8_PmwCch0O0DkZA-YdyI64G3lChpSyc9cIwyoDvQyhkql-6pdY0fy4wHkkS4DuhaJVUf9SvWjh35fjsYmIi1KWNlKHaJdQIVHjj0FvUdrDalXyXDp9Ci7DLGQ1RpYWj2Ak5Ws7sXoo3C2r4xYPEhm5JVSNQTdiOIQoIRoo7ytuI1ncaHVlIJ-WxaKhJhMlVsqkGyQjUqL8Z-yBgDriXxrsbTWPAIrrMcmKU2QjNB_o1ILF4ULteqaUfPgNwQSSFrFEDrSHsoooX5IryrK1lfMQq1DjQgQrh7OXotU7Ct-Hro"
+openshift_deployment_type=openshift-enterprise
+
+
+# SSH user, this user should allow ssh based auth without requiring a password
+ansible_ssh_user=root
+# If ansible_ssh_user is not root, ansible_become must be set to true
+ansible_become=true
+openshift_master_default_subdomain=app.laranja.com.br
+openshift_master_cluster_hostname=api.laranja.com.br
+openshift_master_cluster_public_hostname=api.laranja.com.br
+openshift_master_cluster_method=native
+
+deployment_type=origin
+openshift_master_api_port=443
+openshift_master_console_port=443
+
+etcd_debug=true
+debug_level=4
+
+[nodes:vars]
+openshift_disable_check=disk_availability,memory_availability,docker_storage
+[masters:vars]
+openshift_disable_check=disk_availability,memory_availability,docker_storage
+# uncomment the following to enable htpasswd authentication; defaults to DenyAllPasswordIdentityProvider
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider'}]
+
+# senha master
+openshift_master_htpasswd_users={'pedro': '$apr1$QD/hlKZ9$LlvF0L6/EDo/gpKNU/QW50'}
+
+# host group for masters
+[masters]
+192.168.100.131
+192.168.100.132
+192.168.100.133
+
+[etcd]
+[etcd:children]
+masters
+
+# host group for nodes, includes region info
+[nodes]
+192.168.100.131 openshift_node_group_name='node-config-master'
+192.168.100.132 openshift_node_group_name='node-config-master'
+192.168.100.133 openshift_node_group_name='node-config-master'
+
+192.168.100.134  openshift_node_group_name='node-config-infra'
+192.168.100.135  openshift_node_group_name='node-config-infra'
+192.168.100.136  openshift_node_group_name='node-config-infra'
+
+192.168.100.137  openshift_node_group_name='node-config-compute'
+192.168.100.138  openshift_node_group_name='node-config-compute'
