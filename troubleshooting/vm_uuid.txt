@@ -1,0 +1,45 @@
+[root@master01 ~]# govc vm.info master01.laranja.com.br
+Name:           master01.laranja.com.br
+  UUID:         4202d9de-aa1f-035b-ed05-bf344eac88c5
+
+[root@master01 ~]# kubectl describe node master01.laranja.com.br | grep "System UUID"
+ System UUID:                        DED90242-1FAA-5B03-ED05-BF344EAC88C5
+
+[root@master01 ~]# cat /sys/class/dmi/id/product_serial
+VMware-42 02 d9 de aa 1f 03 5b-ed 05 bf 34 4e ac 88 c5
+
+[root@master01 ~]# cat /sys/class/dmi/id/product_uuid
+DED90242-1FAA-5B03-ED05-BF344EAC88C5
+
+[root@master01 ~]# kubectl get nodes -o json | jq '.items[]|[.metadata.name, .spec.providerID, .status.nodeInfo.systemUUID]'
+[
+  "master01.laranja.com.br",
+  "vsphere://4202d9de-aa1f-035b-ed05-bf344eac88c5",
+  "DED90242-1FAA-5B03-ED05-BF344EAC88C5"
+]
+
+[root@master01 ~]# cat /etc/origin/cloudprovider/vsphere.conf
+[Global]
+user = "administrator@vsphere.local"
+password = "W@ster123"
+server = "192.168.100.102"
+port = 443
+insecure-flag = 1
+datacenter = SVC-DC
+datastore = LAB_Local_Raid5
+working-dir = /SVC-DC/vm/
+
+[Disk]
+scsicontrollertype = pvscsi
+
+[Network]
+public-network = "VM Network"
+[root@master01 ~]#
+
+# https://blog.mimacom.com/ocp-persistent-storage/
+curl -LO https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
+chmod +x jq-linux64
+cp jq-linux64 /usr/bin/jq
+
+kubectl patch node $(hostname) -p '{"spec":{"providerID":"vsphere://422BEF48-A838-7D35-6DDD-883EC1501BAD"}}'
+
