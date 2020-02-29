@@ -43,3 +43,5 @@ cp jq-linux64 /usr/bin/jq
 
 kubectl patch node $(hostname) -p '{"spec":{"providerID":"vsphere://422BEF48-A838-7D35-6DDD-883EC1501BAD"}}'
 
+govc vm.change -e="disk.enableUUID=true" -vm="/SVC-DC/vm/VMsPedroFerreira/OCP/master01.laranja.com.br"
+
