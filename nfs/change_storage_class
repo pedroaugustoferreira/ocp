@@ -1,0 +1,9 @@
+Alterar storage class default
+
+[root@master01 ~]# oc get storageclass
+NAME                         PROVISIONER                          AGE
+glusterfs-storage            kubernetes.io/glusterfs              2h
+glusterfs-storage-block      gluster.org/glusterblock-glusterfs   2h
+vsphere-standard (default)   kubernetes.io/vsphere-volume         4d
+
+oc patch storageclass vsphere-standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class": "false"}}}'
