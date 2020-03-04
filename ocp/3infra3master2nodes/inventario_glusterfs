@@ -1,0 +1,82 @@
+[OSEv3:children]
+masters
+nodes
+etcd
+glusterfs
+
+[OSEv3:vars]
+install_method=rpm
+os_update=false
+install_update_docker=true
+docker_storage_driver=devicemapper
+ansible_ssh_user=root
+openshift_release=v3.11
+oreg_url=registry.access.redhat.com/openshift3/ose-${component}:v3.11
+#openshift_cockpit_deployer_prefix=registry.access.redhat.com/openshift3/
+openshift_docker_insecure_registries=registry.access.redhat.com
+openshift_deployment_type=openshift-enterprise
+openshift_web_console_install=true
+openshift_enable_service_catalog=false
+osm_use_cockpit=false
+osm_cockpit_plugins=['cockpit-kubernetes']
+debug_level=5
+openshift_set_hostname=true
+openshift_override_hostname_check=true
+openshift_disable_check=docker_image_availability
+##openshift_check_min_host_disk_gb=2
+##openshift_check_min_host_memory_gb=1
+#openshift_portal_net=172.31.0.0/16
+openshift_master_cluster_method=native
+openshift_clock_enabled=true
+openshift_use_openshift_sdn=true
+openshift_master_default_subdomain=app.laranja.com.br
+openshift_master_cluster_hostname=api.laranja.com.br
+openshift_master_cluster_public_hostname=api.laranja.com.br
+
+
+openshift_master_dynamic_provisioning_enabled=true
+
+# glusterfs
+openshift_storage_glusterfs_timeout=900
+openshift_storage_glusterfs_namespace=glusterfs
+openshift_storage_glusterfs_storageclass=true
+openshift_storage_glusterfs_storageclass_default=false
+openshift_storage_glusterfs_block_storageclass=true
+openshift_storage_glusterfs_block_storageclass_default=false
+openshift_storage_glusterfs_block_deploy=true
+openshift_storage_glusterfs_block_host_vol_create=true
+openshift_storage_glusterfs_block_host_vol_size=40
+
+openshift_storage_glusterfs_image='registry.access.redhat.com/rhgs3/rhgs-server-rhel7:v3.11'
+
+openshift_storage_glusterfs_heketi_image='registry.access.redhat.com/rhgs3/rhgs-volmanager-rhel7:v3.11'
+
+openshift_storage_glusterfs_block_image='registry.access.redhat.com/rhgs3/rhgs-gluster-block-prov-rhel7:v3.11'
+
+[masters]
+192.168.100.131
+192.168.100.132
+192.168.100.133
+
+[etcd]
+192.168.100.131
+192.168.100.132
+192.168.100.133
+
+[nodes]
+192.168.100.131  openshift_node_group_name='node-config-master'
+192.168.100.132  openshift_node_group_name='node-config-master'
+192.168.100.133  openshift_node_group_name='node-config-master'
+192.168.100.134  openshift_node_group_name='node-config-infra'
+192.168.100.135  openshift_node_group_name='node-config-infra'
+192.168.100.136  openshift_node_group_name='node-config-infra'
+192.168.100.137  openshift_node_group_name='node-config-compute'
+192.168.100.138  openshift_node_group_name='node-config-compute'
+
+[glusterfs]
+192.168.100.131 glusterfs_zone=1 glusterfs_devices='["/dev/sdb"]'
+192.168.100.132 glusterfs_zone=2 glusterfs_devices='["/dev/sdb"]'
+192.168.100.133 glusterfs_zone=3 glusterfs_devices='["/dev/sdb"]'
+192.168.100.134 glusterfs_zone=4 glusterfs_devices='["/dev/sdb"]'
+
+
