@@ -1,4 +1,5 @@
 #!/bin/bash -l
+# */5 * * * * /home/pedro.ferreira.ext/.load/main.sh &> /home/pedro.ferreira.ext/.load/main.log
 cd /home/pedro.ferreira.ext/.load
 . /home/pedro.ferreira.ext/.login
 
