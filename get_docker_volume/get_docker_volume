@@ -1,4 +1,5 @@
 #!/bin/bash -l
+hostname=$(hostname)
 part_01()
 {
 	du --max-depth=1 -h /var/lib/docker/containers |grep G|tr -d '\015'|tr -s '\t' ';'|grep -v "\.$"|egrep -v containers$
@@ -29,6 +30,6 @@ part_03()
 
 part_01 > /tmp/temp01
 part_02 > /tmp/temp02
-part_03|sed 's/;/ /g'|column -t
+part_03|sed 's/;/ /g'|awk '{print "'$hostname' "$0}'|column -t
 > /tmp/temp01
 > /tmp/temp02
