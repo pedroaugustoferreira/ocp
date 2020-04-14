@@ -1,0 +1,34 @@
+#!/bin/bash -l
+part_01()
+{
+	du --max-depth=1 -h /var/lib/docker/containers |grep G|tr -d '\015'|tr -s '\t' ';'|grep -v "\.$"|egrep -v containers$
+}
+
+part_02()
+{
+	for i in $(cat /tmp/temp01);
+	do
+		dir=$(echo $i|rev|cut -d"/" -f1|rev)
+		for j in $(docker ps|awk '{print $1}'|grep -v CONTAINER)
+		do
+			docker inspect $j |grep $dir|head -1|awk '{print "'$i';'$j'"}';
+		done
+	done
+}
+
+part_03()
+{
+	for i in $(cat /tmp/temp02)
+	do
+		c=$(echo $i|cut -d";" -f3)
+		docker ps|grep $c|awk '{print $2}'|awk '{print "'$i';"$0}'; 
+	done
+}
+
+
+
+part_01 > /tmp/temp01
+part_02 > /tmp/temp02
+part_03|sed 's/;/ /g'|column -t
+> /tmp/temp01
+> /tmp/temp02
