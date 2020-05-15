@@ -1,12 +1,5 @@
 #!/bin/bash -l
-user=pedro
-password=master
 dir_temp=/tmp
-
-login()
-{
-        oc login -u "$user" -p "$password" https://opc-dev-int.sascar.com.br > /dev/null
-}
 
 get_pods()
 {
