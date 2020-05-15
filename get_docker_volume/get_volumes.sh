@@ -37,7 +37,8 @@ join_pods_volume_pvc()
         for info in $(cat $dir_temp/pods_volume);
         do
                 pvc=$(echo $info|cut -d";" -f4)
-                cat $dir_temp/pvc|egrep $pvc|awk '{print "'$info';"$0}'
+                namespace=$(echo $info|cut -d";" -f1)
+                cat $dir_temp/pvc|egrep $pvc|egrep $namespace|awk '{print "'$info';"$0}'
         done|tr -s ' ' ';'
 }
 
@@ -51,7 +52,7 @@ get_volumepath_pods_volume_pvc()
 }
 
 
-login
+#login
 get_pods |tee  $dir_temp/pods
 get_pvc |tee  $dir_temp/pvc
 get_pods_volume |tee $dir_temp/pods_volume
