@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# add on .bashrc
+#export GOVC_URL=''
+#export GOVC_USERNAME=''
+#export GOVC_PASSWORD=''
+#export GOVC_INSECURE=1
+#export VM_PATH=
+
+list_server()
+{
+        for i in $(govc ls -L $VM_PATH);
+        do
+                echo $i
+        done
+}
+
+get_device_info()
+{
+        for i in $(list_server)
+        do
+                govc device.info -vm $i | awk '{print "'$i' "$0}'
+        done
+}
+
+
+
+get_device_info
