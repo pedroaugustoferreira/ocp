@@ -11,6 +11,9 @@ VMware-42 02 d9 de aa 1f 03 5b-ed 05 bf 34 4e ac 88 c5
 [root@master01 ~]# cat /sys/class/dmi/id/product_uuid
 DED90242-1FAA-5B03-ED05-BF344EAC88C5
 
+
+###  wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 -O jq;chmod +x jq ;mv jq /bin/
+
 [root@master01 ~]# kubectl get nodes -o json | jq '.items[]|[.metadata.name, .spec.providerID, .status.nodeInfo.systemUUID]'
 [
   "master01.laranja.com.br",
