@@ -48,3 +48,17 @@ kubectl patch node $(hostname) -p '{"spec":{"providerID":"vsphere://422BEF48-A83
 
 govc vm.change -e="disk.enableUUID=true" -vm="/SVC-DC/vm/VMsPedroFerreira/OCP/master01.laranja.com.br"
 
+
+### ver logs
+$master-logs controllers controllers
+
+I0530 23:38:07.129588       1 nodemanager.go:420] Renewing NodeInfo &{dataCenter:0xc42814a7a0 vm:0xc4231ad6e0 vcServer:10.24.35.75 vmUUID:} for node "sas-srvux-appprd-node01.sascar-dc.br"
+I0530 23:38:07.148403       1 nodemanager.go:179] Error "No VM found" while looking for vm=sas-srvux-appprd-node04.sascar-dc.br in vc=<nil> and datacenter=10.24.35.75%!(EXTRA string=DC-SASCAR)
+I0530 23:38:07.148546       1 nodemanager.go:213] Discovery Node: "sas-srvux-appprd-node04.sascar-dc.br" vm not found
+I0530 23:38:07.149043       1 nodemanager.go:420] Renewing NodeInfo &{dataCenter:0xc42814bf50 vm:0xc425469d90 vcServer:10.24.35.75 vmUUID:} for node "sas-srvux-appprd-node01.sascar-dc.br"
+I0530 23:38:07.165481       1 nodemanager.go:179] Error "No VM found" while looking for vm=sas-srvux-appprd-node04.sascar-dc.br in vc=<nil> and datacenter=10.24.35.75%!(EXTRA string=DC-SASCAR)
+I0530 23:38:07.165587       1 nodemanager.go:213] Discovery Node: "sas-srvux-appprd-node04.sascar-dc.br" vm not found
+I0530 23:38:08.360449       1 actual_state_of_world.go:350] SetVolumeMountedByNode volume kubernetes.io/vsphere-volume/[LUN_03_CL_PROD] kubevols/kubernetes-dynamic-pvc-7277d798-5126-11e9-81f9-00505698c947.vmdk to the node "sas-srvux-infra-node02.sascar-dc.br" mounted true
+
+
+
